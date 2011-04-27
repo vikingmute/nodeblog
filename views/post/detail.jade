@@ -1,0 +1,38 @@
+#container
+  .post
+    // title
+    h2
+      a(href=base + '/post/' + post.id + '/') #{post.title}
+      a.edit(href=base + '/post/' + post.id + '/edit') Edit
+  
+    // flash messages
+    != messages()
+  
+    // dates
+    p.date.created Created at #{post.date}
+    - if (post.updatedAt)
+      p.date.updated Updated at #{post.updatedAt}
+  
+    // body
+    pre.body= post.body
+    
+    - if (post.comments.length)
+      #comments
+        - post.comments.forEach(function(comment){
+          h3 #{comment.title}
+          p #{comment.body}
+        - })
+    
+  
+    //comment
+    form#comment(action=base+'/comment/'+post.id, method='post')
+      p
+        label(for='comment[title]') Title:
+        input(type='text', name='comment[title]')
+      p
+        label(for='comment[body]') Body:
+        textarea(name='comment[body]')
+      p
+        input(type='submit')
+script(type='text/javascript',src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js')
+script(type='text/javascript',src=base + '/comment.js')
