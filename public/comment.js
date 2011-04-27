@@ -9,7 +9,6 @@ $(function(){
 				data[this.elements[i].name] = this.elements[i].value;
 			}
 		}
-		console.log(data);
 		$.post(this.action,data,function(d){
 			document.getElementById('comments').innerHTML += '<h3>'+d.title+'</h3><p>'+d.body+'</p>';
 		}, "json")
